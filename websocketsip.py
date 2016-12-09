@@ -120,15 +120,8 @@ class SimpleSip(WebSocket):
             self.sendMessage(u"You have no call")
 
     def mute(self, *args, **kwargs):
+        # TODO
         self.sendMessage(u"Mute func called")
-
-    def sum(self, a, b):
-        try:
-            a = float(a)
-            b = float(b)
-            self.sendMessage(u"Sum={}".format(a+b))
-        except Exception:
-            self.sendMessage(u"Value Error")
 
     def handleMessage(self):
         # commands in plain text like:
