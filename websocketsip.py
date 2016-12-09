@@ -90,6 +90,9 @@ class SimpleSip(WebSocket):
 
     def make_call(self, uri):
         # Make call
+        if self.call:
+            print 'only one call supported'
+            return
         print "calling ", uri, '...'
         if uri.startswith('sip:'):
             self.sendMessage(u"Calling {}...".format(self.data))
@@ -119,9 +122,22 @@ class SimpleSip(WebSocket):
         else:
             self.sendMessage(u"You have no call")
 
-    def mute(self, *args, **kwargs):
-        # TODO
-        self.sendMessage(u"Mute func called")
+    def mute_mic(self):
+        print 'called mute mic call'
+        if not self.lib:
+            return
+        try:
+            tx_level, rx_level = self.lib.conf_get_signal_level(0)
+            if rx_level > 0.0:
+                self.lib.conf_set_rx_level(0, 0)
+                levels = self.lib.conf_get_signal_level(0)
+                self.sendMessage(u"Mic muted (level: {})".format(levels))
+            else:
+                self.lib.conf_set_rx_level(0, 1)
+                levels = self.lib.conf_get_signal_level(0)
+                self.sendMessage(u"Mic unmuted (level: {})".format(levels))
+        except Exception as e:
+            print e,
 
     def handleMessage(self):
         # commands in plain text like:
