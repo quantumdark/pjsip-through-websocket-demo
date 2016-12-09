@@ -8,11 +8,11 @@ A small demo to demonstrate managing the softphone pjsua from javascript through
 3) install simple-websocket-server
 
 # How to try
-1) start the server ./websocketsip.py <sipserver> <login> <password>
+1) start the server ./websocketsip.py sipserver login password  
 2) open websocket.html from the project simple-websocket-server  
 3) Try commands, you'll see something like this:  
   
-response: Connected to server. SIP Account={Account <sip:1111111@sip.------.com>}  
+response: Connected to server. SIP Account={Account \<sip:1111111@sip.------.com\>}  
 sent: make_call sip:111111111111@sip.------.com  
 response: Calling make_call sip:111111111111@sip.------.com...  
 response: Call is CALLING, last code=0 ()  
