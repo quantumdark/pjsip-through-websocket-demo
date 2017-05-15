@@ -241,6 +241,18 @@ class Dispatcher:
             levels = self.lib.conf_get_signal_level(0)
             return levels
 
+    def enum_devices(self):
+        return ["%s <in: %s, out: %s>" % (dev.name,
+                                          dev.input_channels,
+                                          dev.output_channels
+                                          ) for dev in self.lib.enum_snd_dev()]
+
+    def get_current_devices(self):
+        return self.lib.get_snd_dev()
+
+    def set_current_devices(self, capture_dev, playback_dev):
+        return self.lib.set_snd_dev(capture_dev, playback_dev)
+
 
 class WebSocketSip(WebSocket):
 
