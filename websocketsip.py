@@ -193,14 +193,14 @@ class Dispatcher:
         if self.call:
             logger.info('only one call supported')
             return
-        logger.info("calling %s...", uri)
-        if uri.startswith('sip:'):
+        logger.info("calling %s...", sip_uri)
+        if sip_uri.startswith('sip:'):
             self.call = acc.make_call(
-                uri.encode(),
+                sip_uri.encode(),
                 MyCallCallback(self.websocket))
             return True
         else:
-            raise ValueError("Wrong SIP id {}.".format(uri))
+            raise ValueError("Wrong SIP id {}.".format(sip_uri))
 
     def hangup(self):
         logger.debug('called hangup method')
